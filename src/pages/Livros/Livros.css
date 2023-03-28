@@ -1,0 +1,9 @@
+.livros td img {
+    height: 100px;
+}
+
+.livros td,tr {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 15px;
+}

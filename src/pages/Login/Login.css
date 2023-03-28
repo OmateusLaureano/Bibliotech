@@ -1,0 +1,32 @@
+.container-login{
+    background: linear-gradient(rgb(1, 104, 1),black);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-login{
+    border-radius: 20px;
+    background-color: rgb(237, 230, 230);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 40px;
+}
+
+.form-container{
+    display: flex;
+    align-items: center;
+    width: 350px;    
+    flex-direction: column;
+}
+
+.group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px 0px;
+}
