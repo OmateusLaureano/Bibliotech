@@ -6,6 +6,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { auth } from "./firebase/Config";
 import { AddLivro} from "./pages/AddLivro/AddLivro";
 import { Cadastro } from "./pages/Cadastro/Cadastro";
+import { EditLivro } from "./pages/EditLivro/EditLivro";
 import { Home } from "./pages/Home/Home";
 import { Livros } from "./pages/Livros/Livros";
 import { Login } from "./pages/Login/Login";
@@ -27,6 +28,7 @@ export function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/livros" element={<Livros/>}/>
                         <Route path="/livros/adicionar" element={<AddLivro />} />
+                        <Route path="/livros/editar/:id" element={<EditLivro />} />
                     </Route>
                     <Route path="/Login" element={<Login />} />
                     <Route path="/Cadastro" element={<Cadastro />} />

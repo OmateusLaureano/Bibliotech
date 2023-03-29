@@ -32,3 +32,4 @@ return resultado.user
 export async function logOut(){
     await signOut(auth)
 }
+

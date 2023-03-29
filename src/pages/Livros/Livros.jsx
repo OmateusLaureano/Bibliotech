@@ -33,6 +33,7 @@ export function Livros() {
                                     <th>Categoria</th>
                                     <th>ISBN</th>
                                     <th>Imagem</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,6 +45,24 @@ export function Livros() {
                                             <td>{livro.categoria}</td>
                                             <td>{livro.isbn}</td>
                                             <td><img src={livro.urlCapa} alt={`Capa do livro: ${livro.titulo}`} /></td>
+                                            <td>
+                                                <Button
+                                                    as={Link}
+                                                    to={`/livros/editar/${livro.id}`}
+                                                    variant="warning"
+                                                    size="sm"
+                                                    className="me-2"
+                                                >
+                                                    <i className="bi bi-pencil-fill"></i>
+                                                </Button>
+                                                <Button
+                                                    as={Link}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    <i className="bi bi-trash3-fill"></i>
+                                                </Button>
+                                            </td>
                                         </tr>
                                     )
                                 })}
