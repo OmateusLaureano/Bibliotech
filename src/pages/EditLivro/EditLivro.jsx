@@ -1,19 +1,32 @@
-import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { getLivro, updateLivro } from "../../firebase/livros";
+import { getLivro, updateLivro, uploadCapaLivro } from "../../firebase/livros";
 
 export function EditLivro() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate()
 
-    const {id} = useParams()
+    const { id } = useParams()
 
     function onSubmit(data) {
-        updateLivro(id, data)
-        navigate("/livros")
+        const imagem = data.imagem[0]
+        if (imagem) {
+            const toastID = toast.loading("Upload da imagem...", { position: "top-right" })
+            uploadCapaLivro(imagem).then((url) => {
+                toast.dismiss(toastID)
+                data.urlCapa = url
+                delete data.imagem
+                updateLivro(id, data)
+                navigate("/livros")
+            })
+        } else {
+            delete data.imagem
+            updateLivro(id, data)
+            navigate("/livros")
+        }
     }
 
     useEffect(() => {
@@ -58,10 +71,7 @@ export function EditLivro() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Imagem da capa</Form.Label>
-                        <Form.Control type="url" className={errors.urlCapa && "is-invalid"} {...register("urlCapa", { required: "O endereço da capa é obrigatório!" })} />
-                        <Form.Text className="text-danger">
-                            {errors.urlCapa?.message}
-                        </Form.Text>
+                        <Form.Control type="file" {...register("imagem")} />
                     </Form.Group>
                     <Button type="submit" variant="success">Editar</Button>
                 </Form>

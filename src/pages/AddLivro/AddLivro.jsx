@@ -1,7 +1,8 @@
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { addBook } from "../../firebase/livros";
+import { addBook, uploadCapaLivro } from "../../firebase/livros";
 
 export function AddLivro() {
 
@@ -9,8 +10,21 @@ export function AddLivro() {
     const navigate = useNavigate()
 
     function onSubmit(data) {
-        addBook(data)
-        navigate("/livros")
+        const imagem = data.imagem[0]
+        const toastID = toast.loading("Upload da imagem...", {position: "top-right"})
+        if(imagem){
+            uploadCapaLivro(imagem).then((url) => {
+                toast.dismiss(toastID)
+                data.urlCapa = url
+                delete data.imagem
+                addBook(data)
+                navigate("/livros")
+            })
+        }else{
+            delete data.imagem
+                addBook(data)
+                navigate("/livros")
+        }
     }
 
     return (
@@ -49,10 +63,7 @@ export function AddLivro() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Imagem da capa</Form.Label>
-                        <Form.Control type="url" className={errors.urlCapa && "is-invalid"} {...register("urlCapa", {required: "O endereço da capa é obrigatório!"})} />
-                        <Form.Text className="text-danger">
-                            {errors.urlCapa?.message}
-                        </Form.Text>
+                        <Form.Control type="file" accept=".jpg, .png, .jpeg, .gif" {...register("imagem")} />
                     </Form.Group>
                     <Button type="submit" variant="success">Adicionar</Button>
                 </Form>

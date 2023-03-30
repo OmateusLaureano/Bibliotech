@@ -5,8 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthContext } from "./contexts/AuthContext";
 import { auth } from "./firebase/Config";
 import { AddLivro} from "./pages/AddLivro/AddLivro";
+import { AdicionarEmprestimo } from "./pages/AdicionarEmprestimo/AdicionarEmprestimo";
 import { Cadastro } from "./pages/Cadastro/Cadastro";
+import { EditEmprestimos } from "./pages/EditEmprestimos/EditEmprestimos";
 import { EditLivro } from "./pages/EditLivro/EditLivro";
+import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { Home } from "./pages/Home/Home";
 import { Livros } from "./pages/Livros/Livros";
 import { Login } from "./pages/Login/Login";
@@ -29,6 +32,9 @@ export function App() {
                         <Route path="/livros" element={<Livros/>}/>
                         <Route path="/livros/adicionar" element={<AddLivro />} />
                         <Route path="/livros/editar/:id" element={<EditLivro />} />
+                        <Route path="/emprestimos" element={<Emprestimos />} />
+                        <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
+                        <Route path="/emprestimos/editar/:id" element={<EditEmprestimos />} />
                     </Route>
                     <Route path="/Login" element={<Login />} />
                     <Route path="/Cadastro" element={<Cadastro />} />

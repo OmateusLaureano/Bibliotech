@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Menu/Loader/Loader";
-import { getLivros } from "../../firebase/livros";
+import { deleteLivro, getLivros } from "../../firebase/livros";
 import "./Livros.css"
 
 export function Livros() {
@@ -14,6 +15,18 @@ export function Livros() {
             setLivros(busca)
         })
     }, []);
+
+    function onDeleteLivro(id, titulo){
+        const deletar = window.confirm("Deseja excluir?")
+        if (deletar){
+            deleteLivro(id).then(() => {
+                toast.success(`${titulo} apagado com sucesso`, {position:"bottom-right", duration: 2500})
+                getLivros().then((busca) => {
+                    setLivros(busca)
+                })
+            })
+        }
+    }
 
     return (
         <div className="livros">
@@ -59,6 +72,7 @@ export function Livros() {
                                                     as={Link}
                                                     variant="danger"
                                                     size="sm"
+                                                    onClick={() => onDeleteLivro(livro.id)}
                                                 >
                                                     <i className="bi bi-trash3-fill"></i>
                                                 </Button>

@@ -30,6 +30,9 @@ export function Menu() {
                         <Nav.Link as={Link} to="/livros">
                             Livro
                         </Nav.Link>
+                        <Nav.Link as={Link} to="/emprestimos">
+                            Empréstimos
+                        </Nav.Link>
                         <Nav.Link onClick={onLogOut}>
                             <i className="bi bi-box-arrow-right"></i>
                         </Nav.Link>
