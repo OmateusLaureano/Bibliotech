@@ -24,7 +24,7 @@ export function Footer() {
         </div>
         <footer>
             <section className="footer2">
-            &copy; <em id="date"></em>Bibliotech
+            &copy; <em id="date"></em>Bibliotec
             </section> 
         </footer>
     </>)
